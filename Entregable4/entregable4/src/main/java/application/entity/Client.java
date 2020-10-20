@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,6 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Client {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
 	@Column
@@ -33,12 +36,11 @@ public class Client {
 	public Client() {
 
 	}
-	public Client(String name, String lastname, long id) {
+	public Client(String name, String lastname) {
 		super();
 		this.name = name;
 		this.lastname = lastname;
 		this.products = new ArrayList<Purchase>();
-		this.id = id;
 	}
 	
 	public long getId() {

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import application.dto.ClientPurchase;
 import application.entity.Client;
 import application.repository.ClientRepository;
 
@@ -64,6 +66,22 @@ public class ClientControllerJPA {
 					newClient.setId(id);
 					return repository.save(newClient);
 				});
+	}
+	
+	
+	//Reporte de gastos por cliente
+	@GetMapping("/report")
+	public List<ClientPurchase> getReport() {
+		List<ClientPurchase> report = new ArrayList<ClientPurchase>();
+		List<Client> listClients = repository.findAll();
+		
+		for(int i=0; i<listClients.size(); i++) {
+			int expense = repository.purchasesByClient(listClients.get(i).getId());
+			ClientPurchase client = new ClientPurchase(listClients.get(i), expense);
+			report.add(client);
+		}
+		
+		return report;
 	}
 
 //	@GetMapping("/BySurname/{surname}")

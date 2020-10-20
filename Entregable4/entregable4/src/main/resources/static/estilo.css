@@ -1,0 +1,31 @@
+.centrado {
+    border-style: solid;
+    text-align: center;
+}
+
+.save {
+    display: none;
+}
+
+.edit {
+    display: block;
+}
+
+table{
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+table, td, th {
+	border: 2px solid;
+	padding:20px;
+}
+
+button {
+	color:white;
+	font-weight:bold;
+	background-color:orange;
+	width:100px;
+	height:25px;
+	font-size:15px;
+}
